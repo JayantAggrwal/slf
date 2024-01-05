@@ -11,15 +11,33 @@
     <button id="fetch-btn">Fetch</button>
     <p id="response-output">Response Placeholder</p>
 
+    <button id="poke-btn">Poke Button</button>
+    <p id="poke-output">Poke Output</p>
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const fetchBtn = document.getElementById('fetch-btn')
         const responseText = document.getElementById('response-output')
 
-        fetchBtn.addEventListener('click', () => {
-          responseText.innerText = 'Static Text Replacement'
-        })
+        fetchBtn.addEventListener('click', async()=>{
+          const response = await fetch('/.netlify/functions/hello')
+          const data = await response.json()
+          responseText.innerText = JSON.stringify(data)
+        }
+        )
       })
+      document.addEventListener('DOMContentLoaded', () => {
+        const pokeBtn = document.getElementById('poke-btn')
+        const pokeText = document.getElementById('poke-output')
+
+        pokeBtn.addEventListener('click', async()=>{
+          const response = await fetch('/.netlify/functions/poke')
+          const data = await response.json()
+          pokeText.innerText = JSON.stringify(data)
+        }
+        )
+      })
+
     </script>
   </body>
 </html>
