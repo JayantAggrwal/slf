@@ -7,8 +7,60 @@
     <title>Jamstack Explorers - Up and Running with Serverless Functions</title>
   </head>
   <body>
-    <p>
-      Hello from <strong>Serverless Functions</strong>!
-    </p>
+    <h1>Up and Running with Serverless Functions</h1>
+    <button id="fetch-btn">Fetch</button>
+    <p id="response-output">Response Placeholder</p>
+
+    <button id="poke-btn">Poke Button</button>
+    <p id="poke-output">Poke Output</p>
+
+    
+    //contact form
+    <form name="contact" method="POST"  netlify>
+      <p>
+        <label>Your Name: <input type="text" name="name" /></label>
+      </p>
+      <p>
+        <label>Your Email: <input type="email" name="email" /></label>
+      </p>
+      <p>
+        <label>Your Role: <select name="role[]" multiple>
+          <option value="leader">Leader</option>
+          <option value="follower">Follower</option>
+        </select></label>
+      </p>
+      <p>
+        <label>Message: <textarea name="message"></textarea></label>
+      </p>
+      <p>
+        <button type="submit">Send</button>
+      </p>
+    </form>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const fetchBtn = document.getElementById('fetch-btn')
+        const responseText = document.getElementById('response-output')
+
+        fetchBtn.addEventListener('click', async()=>{
+          const response = await fetch('/.netlify/functions/hello')
+          const data = await response.json()
+          responseText.innerText = JSON.stringify(data)
+        }
+        )
+      })
+      document.addEventListener('DOMContentLoaded', () => {
+        const pokeBtn = document.getElementById('poke-btn')
+        const pokeText = document.getElementById('poke-output')
+
+        pokeBtn.addEventListener('click', async()=>{
+          const response = await fetch('/.netlify/functions/poke')
+          const data = await response.json()
+          pokeText.innerText = JSON.stringify(data)
+        }
+        )
+      })
+
+    </script>
   </body>
 </html>
