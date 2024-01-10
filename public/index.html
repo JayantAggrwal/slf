@@ -14,6 +14,48 @@
     <button id="poke-btn">Poke Button</button>
     <p id="poke-output">Poke Output</p>
 
+    <button id="poke2-btn">Poke2 Button</button>
+    <p id="poke2-output">Poke2 Output</p>
+
+
+
+    //contact form
+    <form name="contact" method="POST" data-netlify="true">
+      <p>
+        <label>Your Name: <input type="text" name="name" /></label>
+      </p>
+      <p>
+        <label>Your Email: <input type="email" name="email" /></label>
+      </p>
+      <p>
+        <label>Your Role: <select name="role[]" multiple>
+          <option value="leader">Leader</option>
+          <option value="follower">Follower</option>
+        </select></label>
+      </p>
+      <p>
+        <label>Message: <textarea name="message"></textarea></label>
+      </p>
+      <p>
+        <button type="submit">Send</button>
+      </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const fetchBtn = document.getElementById('fetch-btn')
@@ -37,6 +79,20 @@
         }
         )
       })
+      
+      document.addEventListener('DOMContentLoaded', () => {
+        const poke2Btn = document.getElementById('poke2-btn')
+        const poke2Text = document.getElementById('poke2-output')
+      
+        poke2Btn.addEventListener('click',async()=>{
+        const res  = await fetch('/.netlify/functions/poke2',{
+          method:'POST',
+          body:JSON.stringify({name:'yellow'})}
+          )
+        const data = res.json()
+          poke2Text.innerText = JSON.stringify(data)
+      })
+    })
 
     </script>
   </body>
